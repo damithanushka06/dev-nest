@@ -16,9 +16,4 @@ export const routes: Routes = [
     loadComponent: () =>
       import('../app/counter/counter.component').then(m => m.CounterComponent),
   },
-  {
-    path: '',
-    redirectTo: 'child1',
-    pathMatch: 'full',
-  },
 ];

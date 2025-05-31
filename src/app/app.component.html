@@ -1,11 +1,23 @@
-<nav class="navbar">
-  <a routerLink="/child1" routerLinkActive="active">Child 1</a>
-  <a routerLink="/child2" routerLinkActive="active">Child 2</a>
-  <a routerLink="/counter" routerLinkActive="active">Counter</a>
-</nav>
+<!--<nav class="navbar">-->
+<!--  <a routerLink="/child1" routerLinkActive="active">Child 1</a>-->
+<!--  <a routerLink="/child2" routerLinkActive="active">Child 2</a>-->
+<!--  <a routerLink="/counter" routerLinkActive="active">Counter</a>-->
+<!--</nav>-->
 
-<hr />
+<!--<hr />-->
+
+@for (item of items; track item.id) {
+  <div>{{ item.name }}</div>
+}
 
 
+@if (items.length > 0) {
+  <div>{{ items.length }}</div>
+}
+
+
+<h2>User Info</h2>
+<p>ID: {{ user().id }}</p>
+<p>Name: {{ user().name }}</p>
 
 <router-outlet></router-outlet>
