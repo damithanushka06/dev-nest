@@ -1,23 +1,9 @@
-<!--<nav class="navbar">-->
-<!--  <a routerLink="/child1" routerLinkActive="active">Child 1</a>-->
-<!--  <a routerLink="/child2" routerLinkActive="active">Child 2</a>-->
-<!--  <a routerLink="/counter" routerLinkActive="active">Counter</a>-->
-<!--</nav>-->
+<button (click)="clickMe()">Click</button>
 
-<!--<hr />-->
-
-@for (item of items; track item.id) {
-  <div>{{ item.name }}</div>
-}
+<p>Sum: {{ numbers | pureExample }}</p>
 
 
-@if (items.length > 0) {
-  <div>{{ items.length }}</div>
-}
-
-
-<h2>User Info</h2>
-<p>ID: {{ user().id }}</p>
-<p>Name: {{ user().name }}</p>
-
-<router-outlet></router-outlet>
+<div class="container">
+  <div class="box box1">Box 1</div>
+  <div class="box box2">Box 2</div>
+</div>

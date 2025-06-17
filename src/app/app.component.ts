@@ -1,34 +1,43 @@
-import {Component, DestroyRef, inject, signal} from '@angular/core';
-import {RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
-import {TestService} from './service/test.service';
-import {interval} from 'rxjs';
-
+import {
+  ChangeDetectionStrategy,
+  Component
+} from '@angular/core';
+import {Child1Component} from './child-1/child-1.component';
+import {ReplaySubject, Subject} from 'rxjs';
+import {PureExamplePipe} from './pure-example.pipe';
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, RouterLink, RouterLinkActive],
+  imports: [Child1Component, PureExamplePipe],
   templateUrl: './app.component.html',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
-  title = 'dev-nest';
-  items: { id: number; name: string }[] = [
-    { id: 1, name: 'Apple' },
-    { id: 2, name: 'Banana' },
-    { id: 3, name: 'Cherry' },
-    { id: 4, name: 'Date' },
-  ];
+export class AppComponent{
 
-  private userService = inject(TestService);
-
-  user = signal(this.userService.getUser());
-  destroyRef =  inject(DestroyRef)
+  public subject: Subject<number> = new Subject();
+  numbers = [1, 2, 3];
 
   constructor() {
 
-    const sub = interval(1000).subscribe(console.log);
-    this.destroyRef.onDestroy(() => sub.unsubscribe());
+    this.subject = new ReplaySubject<number>(2, 10000);
 
   }
+
+  clickMe(){
+    Promise.resolve().then(() => {
+      throw new Error('Broken');
+    }).catch(err => {
+      console.log({
+        message: err.message,
+        name: err.name,
+        stack: err.stack
+      });
+    });
+
+    //A,D,C,B
+
+  }
+
 
 }
